@@ -1,0 +1,69 @@
+server:
+  port: 4000
+  salt: $2b$10$YKHIuNLMh0M3lddACGS0j.
+  env: local
+  api_url: http://127.0.0.1:4000
+  app_url: https://bizryt.com
+  password: sfsdf
+
+rate:
+  window: 60000
+  limit: 10000
+
+redis:
+  slug: skScrap
+  host: localhost
+  port: 6379
+
+queue:
+  name: sk-scrap-queue
+  worker: true
+  completeLimit: 50000
+  failureLimit: 10000
+  defaultDelay: 200
+
+db:
+  # remote postgres server
+  type: postgres
+  host: 52.66.131.48
+  port: 5432
+  user: postgres
+  password: databasestech09
+  database: sk_db_2
+  logging: true
+
+auth:
+  jwt:
+    secret: ;W,z4HuF=Ii.*c1
+    expires: 96h
+  social:
+    fb:
+      client: 1194445240586595,
+      secret: a055c9d0b01d7ffccb97e3ab56d9a4f8,
+      callbackurl: http://localhost:3000/auth/social/fb/callback
+    google:
+      client: 718263032183-l6bhf6150bn0u5ul51vjf986bua15il5.apps.googleusercontent.com
+      secret: bQvVZSXpZWtOUREzZtJy4q22
+      callbackurl: http://localhost:3000/auth/social/google/callback
+
+aws:
+  s3:
+    bucket: jtride-uat-data
+    key: AKIAZNKEQIPDK7B5AYGI
+    region: ap-south-1
+    secret: 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
+
+fcm:
+  authorization: key=AAAAVYg2iT0:APA91bF8Uxqvp7fSFEJoUGyAV8XB7iapnY-dnfY5l8W1dm2foNSybyXwrpC6Ek_2-gogcd7_s8Eb2UfTl4BHKlVKq7-c_dgR6DL8_-keKrzvsVrZEQjiQ3jpMkR9gVnC7jYuGIfRgoS0
+  token: eTz44HenTg2DJT4jsAmfzV:APA91bG6qhECgJiFT1pLX79zNqeCTTf46YrQCk3CRWZiFSA7i-LUrgfNeg4fHSwg-QGV6LCChP3M950Qy-O8gb5tV0EZPwcZmEKmhDvP1RV7l2VcswmgXqSd9WuNCu2KnAOOFr50PPqS
+  url: https://fcm.googleapis.com/fcm/send
+
+sentry:
+  dsn: 1
+
+mail:
+  sendgrid: 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
+  from: no-reply@bizryt.com
+
+sqs:
+  fifo: https://sqs.ap-south-1.amazonaws.com/647073121222/sk-production-queue.fifo
