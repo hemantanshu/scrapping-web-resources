@@ -14,59 +14,43 @@ pg.types.setTypeParser(1700, (v: any) => parseFloat(v));
 
 // Check typeORM documentation for more information.
 const dbConfig: ConnectionOptions = {
-  name: 'default',
-  type: process.env.DB_TYPE || db.type,
-  host: process.env.DB_HOST || db.host,
-  port: process.env.DB_PORT || db.port,
-  username: process.env.DB_USER || db.user,
-  password: process.env.DB_PASSWORD || db.password,
-  database: process.env.DB_DATABASE || db.database,
-  entities: [
-    join(__dirname, '/../**/**/*.entity.{ts,js}'),
-    join(
-      __dirname,
-      '..',
-      '..',
-      'node_modules/@servicelabsco/**/*.entity.{ts,js}',
-    ),
-  ],
+    name: 'default',
+    type: process.env.DB_TYPE || db.type,
+    host: process.env.DB_HOST || db.host,
+    port: process.env.DB_PORT || db.port,
+    username: process.env.DB_USER || db.user,
+    password: process.env.DB_PASSWORD || db.password,
+    database: process.env.DB_DATABASE || db.database,
+    entities: [join(__dirname, '/../**/**/*.entity.{ts,js}'), join(__dirname, '..', '..', 'node_modules/@servicelabsco/**/*.entity.{ts,js}')],
 
-  // We are using migrations, synchronize should be set to false.
-  synchronize: false,
+    // We are using migrations, synchronize should be set to false.
+    synchronize: false,
 
-  // listen for subscribers
-  // subscribers: [join(__dirname, '/../**/*.subscriber{.ts,.js}')],
+    // listen for subscribers
+    // subscribers: [join(__dirname, '/../**/*.subscriber{.ts,.js}')],
 
-  // Run migrations automatically,
-  // you can disable this if you prefer running migration manually.
-  migrationsRun: false,
-  logging: process.env.DB_LOG_ENABLE || db.logging,
-  logger: 'file',
+    // Run migrations automatically,
+    // you can disable this if you prefer running migration manually.
+    migrationsRun: false,
+    logging: process.env.DB_LOG_ENABLE || db.logging,
+    logger: 'file',
 
-  // allow both start:prod and start:dev to use migrations
-  // __dirname is either dist or src folder, meaning either
-  // the compiled js in prod or the ts in dev
-  migrationsTableName: 'sys_migrations',
-  migrations: [
-    __dirname + '/../migrations/**/*{.ts,.js}',
-    join(
-      __dirname,
-      '..',
-      '..',
-      'node_modules/@servicelabsco/**/migrations/**/*{.ts,.js}',
-    ),
-  ],
-  cli: {
-    migrationsDir: 'src/migrations',
-  },
+    // allow both start:prod and start:dev to use migrations
+    // __dirname is either dist or src folder, meaning either
+    // the compiled js in prod or the ts in dev
+    migrationsTableName: 'sys_migrations',
+    migrations: [__dirname + '/../migrations/**/*{.ts,.js}', join(__dirname, '..', '..', 'node_modules/@servicelabsco/**/migrations/**/*{.ts,.js}')],
+    cli: {
+        migrationsDir: 'src/migrations',
+    },
 
-  // change the naming strategy to snake case
-  namingStrategy: new SnakeNamingStrategy(),
-  extra: {
-    charset: 'utf8_unicode_ci',
-  },
-  supportBigNumbers: true,
-  bigNumberStrings: false,
+    // change the naming strategy to snake case
+    namingStrategy: new SnakeNamingStrategy(),
+    extra: {
+        charset: 'utf8_unicode_ci',
+    },
+    supportBigNumbers: true,
+    bigNumberStrings: false,
 };
 
 export = dbConfig;
