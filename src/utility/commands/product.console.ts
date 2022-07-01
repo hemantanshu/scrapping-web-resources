@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { QueueService, SqlService } from '@servicelabsco/nestjs-utility-services';
 import axios from 'axios';
 import { Command, Console } from 'nestjs-console';
 import { MasterProductRecordEntity } from '../entities/master.product.record.entity';
@@ -10,17 +9,16 @@ export class ProductConsole {
     private counter: number = 0;
     /**
      * Creates an instance of ModelScannerCommand.
-     * @param {QueueService} queueService
-     * @memberof ModelScannerCommand
+     * @memberof ProductConsole
      */
-    constructor(private readonly queueService: QueueService, private readonly sqlService: SqlService) {}
+    constructor() {}
 
     @Command({
         command: 'scrap:product',
         description: 'run worker through sqs',
     })
     async fix() {
-        for (let i = 101; i < 122; ++i) {
+        for (let i = 111; i < 122; ++i) {
             const str = String.fromCharCode(i);
             await this.process(1, str);
         }
@@ -37,7 +35,7 @@ export class ProductConsole {
             const data: any = await this.fetchData(page, search);
             if (!data.data.length) return;
 
-            global.console.log('data-length : ', search, page, data.data.length);
+            global.console.log('data-length : ', search, page, this.counter, data.data.length);
             await this.loadDataIntoDb(data.data, page);
             ++page;
         }
